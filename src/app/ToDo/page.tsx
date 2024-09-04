@@ -3,33 +3,32 @@
 import Header from "../components/header";
 import React, { RefObject, useState } from "react";
 import { useRef } from "react";
-import internal from "stream";
-import { List } from "postcss/lib/list";
 
 const ToDo = () => {
 
     const inputValue: RefObject<HTMLInputElement> = useRef(null);
-    const [taskList, setTaskList] = useState<string[]>([])
+    const [taskList, setTaskList] = useState<string[]>([]);
+    const [isEditVisible, setEditVisible] = useState(false);
 
     const handleClick = () => {
-        if ( inputValue.current){
-            var list: string[] = []
-            list = [...taskList]
-            list.push(inputValue.current.value)
-            setTaskList(list)
-            inputValue.current.value = ''
+        if ( inputValue.current && inputValue.current.value != ''){
+            var list: string[] = [];
+            list = [...taskList];
+            list.push(inputValue.current.value);
+            setTaskList(list);
+            inputValue.current.value = '';
         }
     }
 
     const handleDelete = (index: number) => {
-        var list : string[] = []
-        list = [...taskList]
-        list.splice(index, 1)
-        setTaskList(list)
+        var list : string[] = [];
+        list = [...taskList];
+        list.splice(index, 1);
+        setTaskList(list);
     }
 
     const handleEdit = (index: number) => {
-        
+        setEditVisible(!isEditVisible)
     }
 
     return (
@@ -41,6 +40,7 @@ const ToDo = () => {
         </div>
     )
 }
+export default ToDo;
 
 interface ListProps {
     value: string;
@@ -58,5 +58,3 @@ const ListDesign: React.FC<ListProps> = (props) => {
         </div>
     )
 }
-
-export default ToDo;
