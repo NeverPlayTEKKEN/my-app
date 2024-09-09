@@ -43,8 +43,10 @@ const ToDo = () => {
         setTaskList(list);
     }
 
-    const handleEdit = (index: number) => {
-        setEditVisible(!isEditVisible)
+    const handleEditDecide = (index: number, inputText: string) => {
+        var list : string[] = taskList.slice()
+        list[index] = inputText
+        setTaskList(list);
     }
 
     return (
@@ -54,7 +56,7 @@ const ToDo = () => {
             <button onClick={handleClick}>追加する</button>
             <input type='text' className="border" value={inputStateValue} onChange={(e)=>handleChangeInput(e.target.value)}/>
             <button onClick={handleStateClick}>追加する</button>
-            {taskList.map((task, index)=>{return(<ListDesign value={task} index={index} onDelClick={handleDelete} onEditClick={handleEdit}/>)})}
+            {taskList.map((task, index)=>{return(<ListDesign　value={task} index={index} onDelClick={handleDelete} onEditDecide={handleEditDecide}/>)})}
         </div>
     )
 }
@@ -64,15 +66,36 @@ interface ListProps {
     value: string;
     index: number;
     onDelClick(index: number): void;
-    onEditClick(index: number): void;
+    onEditDecide(index: number, inputText: string): void;
 }
 
 const ListDesign: React.FC<ListProps> = (props) => {
+
+    const [isEditing, setIsEditing] = useState(false)
+
+    const [inputText, setInputText] = useState('')
+    
+    const handleEdit = () => {
+        setIsEditing(!isEditing)
+    }
+
+    const handleEditDecide = () => {
+        props.onEditDecide(props.index, inputText)
+        setIsEditing(false)
+    }
+
     return (
         <div>
-            {props.index}：{props.value}
-            <button className="border" onClick={() => props.onDelClick(props.index)}>削除</button>
-            <button className="border" onClick={() => props.onEditClick(props.index)}>編集</button>
+            <span>{props.index}：</span>
+            {isEditing ? (
+                <span>
+                    <input type='text'  onChange={(e)=>setInputText(e.target.value)} />
+                    <button onClick={handleEditDecide}>確定</button>
+                </span>
+            ):(
+                <span><span>{props.value}</span><button onClick={handleEdit}>編集</button></span>
+            )}
+            <button onClick={() => props.onDelClick(props.index)}>削除</button>
         </div>
     )
 }
