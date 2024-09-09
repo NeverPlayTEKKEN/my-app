@@ -22,7 +22,14 @@ const ToDo = () => {
     }
 
     const handleStateClick = () => {
-        
+        if ( inputStateValue != '' ) {
+            var list: string[] = [];
+            list = [...taskList];
+            list.push(inputStateValue);
+            setTaskList(list);
+            setInputStateValue('');
+        }
+
     }
 
     const handleChangeInput = (inputValue: string) => {
