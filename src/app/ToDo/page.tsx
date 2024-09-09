@@ -7,8 +7,9 @@ import { useRef } from "react";
 const ToDo = () => {
 
     const inputValue: RefObject<HTMLInputElement> = useRef(null);
+    const [inputStateValue, setInputStateValue] = useState<string>("")
     const [taskList, setTaskList] = useState<string[]>([]);
-    const [isEditVisible, setEditVisible] = useState(false);
+    const [isEditVisible, setEditVisible] = useState<boolean>(false);
 
     const handleClick = () => {
         if ( inputValue.current && inputValue.current.value != ''){
@@ -18,6 +19,14 @@ const ToDo = () => {
             setTaskList(list);
             inputValue.current.value = '';
         }
+    }
+
+    const handleStateClick = () => {
+        
+    }
+
+    const handleChangeInput = (inputValue: string) => {
+        setInputStateValue(inputValue)
     }
 
     const handleDelete = (index: number) => {
@@ -34,8 +43,10 @@ const ToDo = () => {
     return (
         <div>
             <Header />
-            <input type='text' className="border" ref={inputValue}></input>
+            <input type='text' className="border" ref={inputValue} />
             <button onClick={handleClick}>追加する</button>
+            <input type='text' className="border" value={inputStateValue} onChange={(e)=>handleChangeInput(e.target.value)}/>
+            <button onClick={handleStateClick}>追加する</button>
             {taskList.map((task, index)=>{return(<ListDesign value={task} index={index} onDelClick={handleDelete} onEditClick={handleEdit}/>)})}
         </div>
     )
