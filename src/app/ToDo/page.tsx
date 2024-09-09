@@ -73,7 +73,7 @@ const ListDesign: React.FC<ListProps> = (props) => {
 
     const [isEditing, setIsEditing] = useState(false)
 
-    const [inputText, setInputText] = useState('')
+    const [inputText, setInputText] = useState(props.value)
     
     const handleEdit = () => {
         setIsEditing(!isEditing)
@@ -89,7 +89,7 @@ const ListDesign: React.FC<ListProps> = (props) => {
             <span>{props.index}：</span>
             {isEditing ? (
                 <span>
-                    <input type='text'  onChange={(e)=>setInputText(e.target.value)} />
+                    <input type='text'  value={inputText} onChange={(e)=>setInputText(e.target.value)} />
                     <button onClick={handleEditDecide}>確定</button>
                 </span>
             ):(
