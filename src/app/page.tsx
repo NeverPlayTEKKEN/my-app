@@ -7,6 +7,7 @@ export default function Home() {
       <Header />
       <div>
         <Link href={'./ToDo'} className="border-2">ToDo</Link>
+        <Link href={'./Weather'} className='border-2'>Weather</Link>
       </div>
     </div>
   );
