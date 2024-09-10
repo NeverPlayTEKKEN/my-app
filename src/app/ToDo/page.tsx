@@ -92,8 +92,8 @@ const ListDesign: React.FC<ListProps> = (props) => {
             <span className={styles.taskindex}>{props.index + 1}</span>
             {isEditing ? (
                 <span className={styles.tasktitle}>
-                    <input type='text'  value={inputText} onChange={(e)=>setInputText(e.target.value)} />
-                    <button onClick={handleEditDecide}>確定</button>
+                    <input type='text'  value={inputText} onChange={(e)=>setInputText(e.target.value)} className={styles.taskname} />
+                    <button onClick={handleEditDecide} className={styles.button}>確定</button>
                 </span>
             ):(
                 <span className={styles.tasktitle}><span className={styles.taskname}>{props.value}</span><button onClick={handleEdit} className={styles.button}>編集</button></span>
