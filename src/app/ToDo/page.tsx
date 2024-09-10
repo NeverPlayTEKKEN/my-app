@@ -1,5 +1,6 @@
 'use client'
 
+import styles from './styles.module.css'
 import Header from "../components/header";
 import React, { RefObject, useState } from "react";
 import { useRef } from "react";
@@ -52,10 +53,12 @@ const ToDo = () => {
     return (
         <div>
             <Header />
-            <input type='text' className="border" ref={inputValue} />
-            <button onClick={handleClick}>追加する</button>
-            <input type='text' className="border" value={inputStateValue} onChange={(e)=>handleChangeInput(e.target.value)}/>
-            <button onClick={handleStateClick}>追加する</button>
+            <div className={styles.inputBox}>
+                <input type='text' className={styles.inputText} ref={inputValue} />
+                <button onClick={handleClick} className={styles.inputButton}>追加する</button>
+            </div>
+            {/*<input type='text' className="border" value={inputStateValue} onChange={(e)=>handleChangeInput(e.target.value)}/>
+            <button onClick={handleStateClick}>追加する</button>*/}
             {taskList.map((task, index)=>{return(<ListDesign　value={task} index={index} onDelClick={handleDelete} onEditDecide={handleEditDecide}/>)})}
         </div>
     )
@@ -85,17 +88,17 @@ const ListDesign: React.FC<ListProps> = (props) => {
     }
 
     return (
-        <div>
-            <span>{props.index}：</span>
+        <div className={styles.taskbox}>
+            <span className={styles.taskindex}>{props.index + 1}</span>
             {isEditing ? (
-                <span>
+                <span className={styles.tasktitle}>
                     <input type='text'  value={inputText} onChange={(e)=>setInputText(e.target.value)} />
                     <button onClick={handleEditDecide}>確定</button>
                 </span>
             ):(
-                <span><span>{props.value}</span><button onClick={handleEdit}>編集</button></span>
+                <span className={styles.tasktitle}><span className={styles.taskname}>{props.value}</span><button onClick={handleEdit} className={styles.button}>編集</button></span>
             )}
-            <button onClick={() => props.onDelClick(props.index)}>削除</button>
+            <button onClick={() => props.onDelClick(props.index)} className={styles.button}>削除</button>
         </div>
     )
 }
