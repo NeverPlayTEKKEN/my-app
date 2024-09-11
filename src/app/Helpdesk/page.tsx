@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { HomeIcon, MagnifyingGlassIcon, PencilSquareIcon, UserCircleIcon } from '@heroicons/react/24/solid';
+import { HomeIcon, MagnifyingGlassIcon, PencilSquareIcon, UserCircleIcon, PencilIcon } from '@heroicons/react/24/solid';
 
 const Helpdesk = () => {
     return (
@@ -17,7 +17,17 @@ const Helpdesk = () => {
                             <div className="mr-4 border-b-2 border-blue-700 text-blue-700">起票した依頼</div>
                             <div>担当チーム宛の依頼</div>
                         </div>
-                        <Image src='/キャプチャ.PNG' width={1260} height={720} alt=''/>
+                        <div className="w-full h-full pb-4 px-6">
+                            <div className="h-[440px] w-full border overflow-y-scroll">
+                                <div className="bg-gray-200 h-10 border">
+                                </div>
+                                <div>
+                                {iraiList.map((item, index:number)=>{
+                                        return(<OneList id={item.id} subject={item.subject} base={item.base} name={item.name} urgent={item.urgent} expected_date={item.expected_date} team={item.team} />)
+                                    })}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,3 +62,158 @@ const Sidebar = () => {
         </div>
     )
 }
+
+const OneList = (props: IraiObject) => {
+
+    return (
+        <div className="grid grid-cols-12 items-center justify-center border">
+            <button className="h-10 w-10 rounded-md border-2 border-blue-400 p-1 flex items-center justify-center"><PencilIcon className="h-6 w-6 text-blue-400"/></button>
+            <div className="text-xs">{props.id}</div>
+            <div className="text-xs col-span-3">{props.subject}</div>
+            <div className="text-xs col-span-2">{props.base}</div>
+            <div className="text-xs">{props.name}</div>
+            <div className="text-xs">{props.urgent}</div>
+            <div className="text-xs">{props.expected_date.toISOString()}</div>
+            <div className="text-xs col-span-2">{props.team}</div>
+        </div>
+    )
+}
+
+interface IraiObject {
+    id: string;
+    subject: string;
+    base: string;
+    name: string;
+    urgent: boolean;
+    expected_date: Date;
+    team: string;
+}
+
+const iraiList: IraiObject[] = [
+    {
+        id: "0000000001",
+        subject: "ユーザーアカウント利用申請書",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: false,
+        expected_date: new Date('2024-09-28'),
+        team: "パスワードクリア ホスト接続, パスワードクリア インターネット"
+    },
+    {
+        id: "0000000002",
+        subject: "ネットワークログインパスワード初期化依頼書",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: true,
+        expected_date: new Date('2024-09-03'),
+        team: "パスワードクリア ホスト接続"
+    },
+    {
+        id: "0000000003",
+        subject: "ユーザーアカウント利用申請書",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: false,
+        expected_date: new Date('2024-09-03'),
+        team: "パスワードクリア ホスト接続"
+    },
+    {
+        id: "0000000004",
+        subject: "ネットワークログインパスワード初期化依頼書",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: true,
+        expected_date: new Date('2024-09-10'),
+        team: "パスワードクリア ホスト接続"
+    },
+    {
+        id: "0000000005",
+        subject: "型テーブル登録届フォーマット",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: false,
+        expected_date: new Date('2024-09-25'),
+        team: "パスワードクリア ホスト接続"
+    },
+    {
+        id: "0000000006",
+        subject: "ユーザーアカウント利用申請書",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: true,
+        expected_date: new Date('2024-09-02'),
+        team: "パスワードクリア ホスト接続"
+    },
+    {
+        id: "0000000007",
+        subject: "型テーブル登録届フォーマット",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: false,
+        expected_date: new Date('2024-09-26'),
+        team: "パスワードクリア ホスト接続"
+    },
+    {
+        id: "0000000008",
+        subject: "ユーザーアカウント利用申請書",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: false,
+        expected_date: new Date('2024-09-13'),
+        team: "パスワードクリア ホスト接続"
+    },
+    {
+        id: "0000000009",
+        subject: "ネットワークログインパスワード初期化依頼書",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: false,
+        expected_date: new Date('2024-09-11'),
+        team: "パスワードクリア ホスト接続"
+    },
+    {
+        id: "0000000010",
+        subject: "ネットワークログインパスワード初期化依頼書",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: false,
+        expected_date: new Date('2024-09-11'),
+        team: "パスワードクリア ホスト接続"
+    },
+    {
+        id: "0000000011",
+        subject: "ネットワークログインパスワード初期化依頼書",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: false,
+        expected_date: new Date('2024-09-11'),
+        team: "パスワードクリア ホスト接続, パスワードクリア インターネット, パスワードクリア 分析ツール, パスワードクリア 秘文"
+    },
+    {
+        id: "0000000012",
+        subject: "ネットワークログインパスワード初期化依頼書",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: false,
+        expected_date: new Date('2024-09-12'),
+        team: "パスワードクリア ホスト接続"
+    },
+    {
+        id: "0000000013",
+        subject: "ネットワークログインパスワード初期化依頼書",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: false,
+        expected_date: new Date('2024-09-30'),
+        team: "パスワードクリア ホスト接続"
+    },
+    {
+        id: "0000000014",
+        subject: "型テーブル登録届フォーマット",
+        base: "東京事務センター",
+        name: "共済 太郎",
+        urgent: false,
+        expected_date: new Date('2024-09-27'),
+        team: "パスワードクリア ホスト接続"
+    }
+];
